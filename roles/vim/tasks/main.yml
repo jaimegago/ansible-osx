@@ -27,10 +27,11 @@
     - { plugin_git_url: "https://github.com/elzr/vim-json.git",
   plugin_name: "vim-json" }
     - { plugin_git_url: "https://github.com/nathanaelkane/vim-indent-guides.git",
-  plugin_name: "vim-fugitive" }
+  plugin_name: "vim-indent-guides" }
     - { plugin_git_url: "https://github.com/scrooloose/syntastic.git",
   plugin_name: "syntastic" }
-
+    - { plugin_git_url: "https://github.com/tpope/vim-fugitive.git",
+  plugin_name: "vim-fugitive" }
 - name: "VIM Config (~/.vimrc)"
   copy: src=.vimrc dest={{ home_dir }}/.vimrc
 
