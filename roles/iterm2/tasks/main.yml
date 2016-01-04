@@ -1,0 +1,31 @@
+---
+- name: "iTerm2 Package"
+  mac_pkg: pkg_type=app
+           url="{{ download_urls.iterm2 }}"/"{{ packages.iterm2 }}"
+           archive_type=zip archive_path=iTerm.app
+
+- name: "iTerm2 Process Check"
+  shell: "ps aux | grep '[i]Term'"
+  ignore_errors: True
+  register: iterm2_running
+
+- debug: msg="iTerm2 Running?If this is not skipped (green output) you need to quit iTerm2. Use Apple Terminal if need be!"
+  when:   iterm2_running.rc == 0
+
+- name: "Delete existing iTerm2 preference file"
+  command: "rm -f {{ home_dir }}/Library/Preferences/{{ plists.iterm2 }}"
+  when: iterm2_running.rc != 0
+
+- name: "Copy iTerm2 plist to preferences"
+  copy: src="{{ plists.iterm2 }}"
+        dest={{ home_dir }}/Library/Preferences/{{ plists.iterm2 }}
+  when: iterm2_running.rc != 0
+
+- name: "iTerm2 Config (read plist)"
+  command: defaults read "{{ plists.iterm2 }}"
+  when: iterm2_running.rc != 0
+
+- name: "Powerline patched fonts"
+  copy: src=Menlo-ForPowerline.ttc
+        dest={{ home_dir }}/Library/Fonts/Menlo-ForPowerline.ttc
+  when: iterm2_running.rc != 0

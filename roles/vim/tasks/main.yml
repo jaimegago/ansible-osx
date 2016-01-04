@@ -1,0 +1,36 @@
+---
+- name: "Vim latest binary via homebrew"
+  homebrew: name=vim state=present update_homebrew=yes
+
+- name: "Vim Pathogen Directories"
+  file: path={{ home_dir }}/{{ item }} state=directory
+  with_items:
+    - .vim
+    - .vim/autoload
+    - .vim/bundle
+
+- name: "Vim Pathogen Install"
+  get_url: url="https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
+           dest="{{ home_dir }}/.vim/autoload/pathogen.vim"
+
+- name: "Vim plugins: Git ones"
+  git: repo={{ item.plugin_git_url }}
+       dest={{ home_dir }}/.vim/bundle/{{ item.plugin_name}}
+       update=yes
+  with_items:
+    - { plugin_git_url: "https://github.com/sjl/gundo.vim.git",
+  plugin_name: "gundo.vim" }
+    - { plugin_git_url: "https://github.com/Lokaltog/vim-powerline",
+  plugin_name: "vim-powerline" }
+    - { plugin_git_url: "https://github.com/scrooloose/nerdtree.git",
+  plugin_name: "nerdtree" }
+    - { plugin_git_url: "https://github.com/elzr/vim-json.git",
+  plugin_name: "vim-json" }
+    - { plugin_git_url: "https://github.com/nathanaelkane/vim-indent-guides.git",
+  plugin_name: "vim-fugitive" }
+    - { plugin_git_url: "https://github.com/scrooloose/syntastic.git",
+  plugin_name: "syntastic" }
+
+- name: "VIM Config (~/.vimrc)"
+  copy: src=.vimrc dest={{ home_dir }}/.vimrc
+
