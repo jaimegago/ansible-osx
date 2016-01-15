@@ -3,7 +3,7 @@
   homebrew: name=vim state=present update_homebrew=yes
 
 - name: "Vim Pathogen Directories"
-  file: path={{ home_dir }}/{{ item }} state=directory
+  file: path=/Users/{{ osx_user }}/{{ item }} state=directory
   with_items:
     - .vim
     - .vim/autoload
@@ -11,11 +11,11 @@
 
 - name: "Vim Pathogen Install"
   get_url: url="https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
-           dest="{{ home_dir }}/.vim/autoload/pathogen.vim"
+           dest="/Users/{{ osx_user }}/.vim/autoload/pathogen.vim"
 
 - name: "Vim plugins: Git ones"
   git: repo={{ item.plugin_git_url }}
-       dest={{ home_dir }}/.vim/bundle/{{ item.plugin_name}}
+       dest=/Users/{{ osx_user }}/.vim/bundle/{{ item.plugin_name}}
        update=yes
   with_items:
     - { plugin_git_url: "https://github.com/sjl/gundo.vim.git",
@@ -32,6 +32,9 @@
   plugin_name: "syntastic" }
     - { plugin_git_url: "https://github.com/tpope/vim-fugitive.git",
   plugin_name: "vim-fugitive" }
+    - { plugin_git_url: "git@github.com:Townk/vim-autoclose.git",
+  plugin_name: "vim-autoclose" }
+
 - name: "VIM Config (~/.vimrc)"
-  copy: src=.vimrc dest={{ home_dir }}/.vimrc
+  copy: src=vimrc dest=/Users/{{ osx_user }}/.vimrc
 

@@ -1,0 +1,18 @@
+---
+- name: "Required Homebrew taps"
+  homebrew_tap: tap={{ item }} state=present
+  with_items:
+    - homebrew/versions
+    - caskroom/cask
+  tags:
+    - virtualbox
+
+- name: "Homebrew cask"
+  homebrew: name=brew-cask state=present
+  tags:
+    - virtualbox
+
+- name: "VirtualBox (Homebrew cask)"
+  homebrew_cask: name=virtualbox state=present
+  tags:
+    - virtualbox

@@ -6,6 +6,12 @@
   vars_prompt:
     - name: "osx_user"
       prompt: "What is the OS X user name to under which to run this playbook?"
+      private: no
+
+    - name: "kitchen_path"
+      prompt: "Path to the kitchen"
+      default: "/opt/kitchen"
 
   roles:
-    - vim
+    - user_checks
+    - kitchen

@@ -1,0 +1,76 @@
+---
+- name: "Make sure /usr/local has the right permissions"
+  command: chown -R "{{ osx_user }}" /usr/local
+  sudo: yes
+  tags:
+    - kitchen
+    - perms
+
+- name: "Kitchen Dependencies available via Homebrew"
+  homebrew: name={{ item }} state=present
+  with_items:
+    - ruby21
+    - libxml2
+    - libxslt
+  tags:
+    - kitchen
+    - deps
+
+- name: "Vagrant plugins"
+  command: vagrant plugin install {{ item }}
+  with_items:
+    - vagrant-berkshelf
+    - vagrant-hostmanager
+    - vagrant-omnibus
+    - vagrant-cachier
+  tags:
+    - kitchen
+    - vagrant
+
+- name: "Berkshelf config"
+  copy: src=berkshelf_conf.json dest=/Users/{{ osx_user }}/.berkshelf/config.json
+  tags:
+    - kitchen
+    - berkshelf
+
+- name: "kitchen repo"
+  git: repo='git@git.bluejeansnet.com:chef/kitchen.git'
+       dest={{ kitchen_path }}
+       update=yes
+       accept_hostkey=yes
+  tags:
+    - kitchen
+    - repo
+  sudo: yes
+
+- debug: msg="kitchen installed at {{ kitchen_path }}"
+  tags:
+    - kitchen
+    - repo
+
+- name: "Make sure kitchen repo has the right permissions"
+  command: chown -R {{ osx_user }} {{ kitchen_path }}
+  tags:
+    - kitchen
+    - repo
+  sudo: yes
+
+- name: "Bourdain gitlab token"
+  template: src=bourdain.json.j2 dest=/Users/{{ osx_user }}/.bourdain.json
+  tags:
+    - kitchen
+    - bourdain
+
+- name: "Kitchen tony check"
+  shell: "cd {{ kitchen_path }}; bundle install; bundle exec tony check"
+  tags:
+    - kitchen
+    - bourdain
+
+- name: "Kitchen aliases"
+  lineinfile: dest=/Users/{{ osx_user }}/.bash_profile line="{{ item }}"
+  with_items:
+    - alias bx='bundle exec'
+  tags:
+    - kitchen
+    - aliases

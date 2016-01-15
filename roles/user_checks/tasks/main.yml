@@ -1,0 +1,3 @@
+---
+- name: "Check user home dir exists"
+  command: "ls /Users/{{ osx_user }}"

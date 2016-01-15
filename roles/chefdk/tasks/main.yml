@@ -1,0 +1,15 @@
+---
+- name: "Get Os X Version (required for ChefDK)"
+  shell: "sw_vers|grep ProductVersion|cut -f2|cut -d'.' -f1,2"
+  register: osx_version
+  tags:
+    - chefdk
+
+- name: "ChefDK"
+  mac_pkg: pkg_type=pkg
+           url={{ download_urls.chefdk }}/{{ osx_version.stdout }}/x86_64/chefdk-"{{ packages.chefdk.version }}".dmg
+           archive_type=dmg
+           archive_path=chefdk-"{{ packages.chefdk.version }}".pkg
+  sudo: yes
+  tags:
+    - chefdk

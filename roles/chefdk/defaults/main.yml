@@ -1,0 +1,6 @@
+---
+download_urls:
+  chefdk: 'https://opscode-omnibus-packages.s3.amazonaws.com/mac_os_x'
+packages:
+  chefdk:
+    version: "0.10.0-1"

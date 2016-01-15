@@ -1,0 +1,5 @@
+---
+- name: "Bundler"
+  gem: name=bundler state=latest
+  tags:
+    - bundler

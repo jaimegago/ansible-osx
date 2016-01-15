@@ -1,0 +1,6 @@
+---
+dependencies:
+  - { role: virtualbox }
+  - { role: vagrant }
+  - { role: chefdk }
+  - { role: bundler }

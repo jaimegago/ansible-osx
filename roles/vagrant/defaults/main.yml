@@ -1,0 +1,5 @@
+---
+download_urls:
+  vagrant: 'https://dl.bintray.com/mitchellh/vagrant/'
+packages:
+  vagrant: "vagrant_1.7.4.dmg"

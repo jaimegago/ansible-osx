@@ -8,4 +8,6 @@
       prompt: "What is the OS X user name to under which to run this playbook?"
 
   roles:
+    - user_checks
+    - iterm2
     - vim

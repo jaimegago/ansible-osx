@@ -1,0 +1,9 @@
+---
+- name: "Vagrant"
+  mac_pkg: pkg_type=pkg
+           url={{ download_urls.vagrant }}/{{ packages.vagrant }}
+           archive_type=dmg
+           archive_path=Vagrant.pkg
+  sudo: yes
+  tags:
+    - vagrant
