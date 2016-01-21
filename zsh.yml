@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+
+  vars_prompt:
+    - name: "osx_user"
+      prompt: "What is the OS X user name to under which to run this playbook?"
+
+  roles:
+    - zsh

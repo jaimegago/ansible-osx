@@ -1,9 +1,11 @@
 ---
-- name: "iTerm2 Package"
-  mac_pkg: pkg_type=app
-           url="{{ download_urls.iterm2 }}"/"{{ packages.iterm2 }}"
-           archive_type=zip archive_path=iTerm.app
-  sudo: yes
+- name: "Homebrew cask"
+  homebrew: name=brew-cask state=present
+  tags:
+    - iterm2
+
+- name: "iTerm2 via homebrew"
+  homebrew_cask: name=iterm2 state=present
   tags:
     - iterm2
 

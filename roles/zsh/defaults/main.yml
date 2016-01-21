@@ -1,0 +1,8 @@
+---
+download_urls:
+  iterm2: "https://iterm2.com/downloads/stable/"
+packages:
+  iterm2: "iTerm2-2_1_4.zip"
+
+plists:
+  iterm2: "com.googlecode.iterm2.plist"

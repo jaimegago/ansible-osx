@@ -1,0 +1,26 @@
+---
+- name: "ZSH latest binary via homebrew"
+  homebrew: name={{ item }} state=present update_homebrew=yes
+  with_items:
+    - zsh
+    - zsh-completions
+  tags:
+    - zsh
+
+- name: "Oh My Zsh (curl bashing)"
+  shell: "curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh"
+  tags:
+    - zsh
+    - oh-my-zsh
+
+- name: "Autojump"
+  homebrew: name=autojump state=present update_homebrew=yes
+  tags:
+    - zsh
+    - autojump
+
+- name: "ZSH config .zshrc"
+  copy: src=zshrc dest=/Users/{{ osx_user }}/.zshrc
+  tags:
+    - zsh
+    - zshrc
