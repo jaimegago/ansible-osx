@@ -27,7 +27,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
- ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
  COMPLETION_WAITING_DOTS="true"
@@ -40,7 +40,9 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="mm/dd/yyyy"
+HIST_IGNORE_DUPS="true"
+HIST_FIND_NO_DUPS="true"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -49,7 +51,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git autojump)
+plugins=(git zsh-syntax-highlighting autojump bundler osx homwebrew gem git-extras jsontools knife last-working-dir pip python)
 
 # User configuration
 
@@ -85,11 +87,8 @@ export EDITOR='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias bx='bundle exec'
 alias release='bundle exec rake release'
-alias bc_constrain='bundle exec rake constrain[bjn_bitcouncil_prod]'
-alias z_constrain='bundle exec rake constrain[bjn_bitcouncil_z]'
-alias orion_constrain='bundle exec rake constrain[bjn_bitcouncil_orion]'
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-export HISTCONTROL=erasedups
+alias z_constrain="bundle exec rake 'constrain[bjn_bitcouncil_z]'"
+alias orion_constrain="bundle exec rake 'constrain[bjn_bitcouncil_orion]'"
+bindkey "\e[A": history-search-backward
+bindkey "\e[B": history-search-forward
 export HISTSIZE=10000
-export HISTTIMEFORMAT="%F %T "
