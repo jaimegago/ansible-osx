@@ -92,3 +92,6 @@ alias orion_constrain="bundle exec rake 'constrain[bjn_bitcouncil_orion]'"
 bindkey "\e[A": history-search-backward
 bindkey "\e[B": history-search-forward
 export HISTSIZE=10000
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX=""
