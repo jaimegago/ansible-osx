@@ -12,5 +12,5 @@ Install Ansible
 brew install ansible
 
 Run the playbook
-ansible-playbook <playbook.yml> -i dummy-inv -K
+ansible-playbook <playbook.yml> [-K]
 
